@@ -1,0 +1,4 @@
+# depslib dependency file v1.0
+1573096914 source:/home/leonardo/Documents/Faculdade/2019-2/CG/bird/main.c
+	<GL/glut.h>
+
