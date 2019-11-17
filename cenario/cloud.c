@@ -1,5 +1,12 @@
 ﻿#include <stdio.h>
 #include <stdlib.h>
+#include <windows.h>
+#include <GL\glut.h>
+#include <math.h>
+
+int n = 50;
+float ang = 0;
+
 #define EOL '\n'
 
 #ifndef OBJLIB_H_INCLUSO //Evitar que biblioteca seja carregada duas vezes
@@ -22,7 +29,7 @@ typedef struct{
     Face *faces;
     int numFaces;
 }Obj;
-
+Obj *nuvem;
 Obj *objCarrega(char* filename);
 void objLibera(Obj *obj);
 void objImprime(Obj *obj);
@@ -284,8 +291,30 @@ void objImprime(Obj *obj){
         printf("\nFace:\n\tx: %f\ty: %f\tz: %f",v[2].x,v[2].y,v[2].z);
     }
 }
-int main (){
+void circle(){
+
+    glClear(GL_COLOR_BUFFER_BIT);
+    glColor3f(255,255,255);
+    glDrawElements(GL_POLYGON, 98 , GL_UNSIGNED_INT, nuvem->faces->verts); //https://www.khronos.org/registry/OpenGL-Refpages/gl2.1/xhtml/glDrawElements.xml
+
+    glFlush();
+}
+void init(){
+    glClearColor(0, 127, 255, 0); //Preto
+    glClear(GL_COLOR_BUFFER_BIT);
+    glMatrixMode(GL_MODELVIEW);
+}
+
+int main ( int argc , char * argv [] ){
     Obj *nuvem;
-    nuvem = objCarrega("C:/Users/aamgo/Desktop/Comutação Grafica/flappyBird/flappy-bird/cenario");
-    objImprime(nuvem);
+    nuvem = objCarrega("C:/Users/aamgo/Desktop/abc/cloud.obj");
+    glutInit(&argc , argv);
+    glutInitDisplayMode (GLUT_SINGLE | GLUT_RGB);
+    glutInitWindowPosition (50 ,100);
+    glutInitWindowSize (600 ,600);
+    glutCreateWindow ("Flappy Bird");
+    init();
+    glutDisplayFunc (circle);
+    glutMainLoop ();
+    return 0;
 }
