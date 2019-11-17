@@ -1,4 +1,4 @@
-#include <stdio.h>
+﻿#include <stdio.h>
 #include <stdlib.h>
 #define EOL '\n'
 
@@ -94,12 +94,12 @@ Obj *objCarrega(char* filename){
         printf("\n\tFalha no carregamento!");
         return NULL;         //Erro no carregamento do arquivo
     }
-    obj = malloc(sizeof(Obj));          //Aloca espaço - Objeto
-    verts = malloc(sizeof(Vert));       //Aloca espaço - Vértices
-    norms = malloc(sizeof(Vert));       //Aloca espaço - Normais
-    tex = malloc(sizeof(Vert));       //Aloca espaço - Texturas
+    obj = (Obj*)malloc(sizeof(Obj));          //Aloca espaço - Objeto
+    verts = (Vert*)malloc(sizeof(Vert));       //Aloca espaço - Vértices
+    norms =  (Vert*) malloc(sizeof(Vert));       //Aloca espaço - Normais
+    tex = (Vert*)malloc(sizeof(Vert));       //Aloca espaço - Texturas
 
-    obj->faces = malloc(sizeof(Face));  //Aloca espaço - Faces
+    obj->faces = (Face*)malloc(sizeof(Face));  //Aloca espaço - Faces
     obj->numFaces = 0;
 
     if (obj   == NULL ||
@@ -121,7 +121,7 @@ Obj *objCarrega(char* filename){
                 if (res == ' '){
                     fscanf(f,"%f %f %f",&x,&y,&z);
                     if (nVerts > 0){
-                        verts = realloc(verts,sizeof(Vert)*(nVerts+1));
+                        verts = (Vert*) realloc(verts,sizeof(Vert)*(nVerts+1));
                         if (max.x < x) max.x = x; else if (min.x > x) min.x = x;
                         if (max.y < y) max.y = y; else if (min.y > y) min.y = y;
                         if (max.z < z) max.z = z; else if (min.z > z) min.z = z;
@@ -141,7 +141,7 @@ Obj *objCarrega(char* filename){
                 }else if (res == 'n' || res == 'N'){
                     fscanf(f,"%f %f %f",&x,&y,&z);
                     if (nNorms > 0)
-                        norms = realloc(norms,sizeof(Vert)*(nNorms+1));
+                        norms = (Vert*)realloc(norms,sizeof(Vert)*(nNorms+1));
                     norms[nNorms].x = x;
                     norms[nNorms].y = y;
                     norms[nNorms].z = z;
@@ -154,7 +154,7 @@ Obj *objCarrega(char* filename){
                     temTextura = 1;
                     fscanf(f,"%f %f",&x,&y);
                     if (nTex > 0)
-                        tex = realloc(tex,sizeof(Vert)*(nTex+1));
+                        tex = (Vert*)realloc(tex,sizeof(Vert)*(nTex+1));
                     tex[nTex].x = x;
                     tex[nTex].y = y;
                     tex[nTex].z = 0;
@@ -172,14 +172,14 @@ Obj *objCarrega(char* filename){
                 #endif
 
                 if (obj->numFaces > 0)
-                    obj->faces = realloc(obj->faces,sizeof(Face)*(obj->numFaces+1));
+                    obj->faces = (Face*)realloc(obj->faces,sizeof(Face)*(obj->numFaces+1));
 
 
-                obj->faces[obj->numFaces].verts = malloc(sizeof(Vert)*3);
+                obj->faces[obj->numFaces].verts = (Vert*) malloc(sizeof(Vert)*3);
                 //obj->faces[obj->numFaces].norms = malloc(sizeof(Vert)*3);
 
                 if (temTextura)
-                    obj->faces[obj->numFaces].tex = malloc(sizeof(Vert)*3);
+                    obj->faces[obj->numFaces].tex = (Vert*) malloc(sizeof(Vert)*3);
                 else
                     obj->faces[obj->numFaces].tex = NULL;
 
