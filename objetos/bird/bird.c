@@ -7,21 +7,10 @@
 
 GLUquadricObj *obj;
 
-float angX = 0;
-float angY = 0;
+float angX = 0.0;
+float angY = 90.0;
 float headRadius = 4.0;
 float eyeRadius = 1.0;
-
-void init(){
-     glClearColor(0.0,0.0,0.0,0.0);
-     glEnable(GL_DEPTH_TEST); //habilita o teste de profundidade
-     glMatrixMode(GL_MODELVIEW);
-     glLoadIdentity();
-     glOrtho(-7,7,-7,7,-7,7);
-     glPushMatrix();
-     obj = gluNewQuadric();
-     gluQuadricDrawStyle(obj,GLU_LINE);
-}
 
 void drawEyes() {
     glPushMatrix();
@@ -105,7 +94,6 @@ void drawWing(int side, float size, float yOffset, float r, float g, float b) { 
     glPopMatrix();
 }
 
-
 void drawWings() {
     drawWing(1, 1.0, 0.0, 0.85, 0.85, 0.85);
     drawWing(-1, 1.0, 0.0, 0.85, 0.85, 0.85);
@@ -117,53 +105,11 @@ void drawWings() {
     drawWing(-1, 0.65, 0.5, 0.95, 0.95, 0.95);
 }
 
-void drawBird() {
+extern void drawBird() {
     drawBody();
     drawEyes();
     drawBeak();
     drawWings();
 }
 
-void display()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT); //limpa o buffer
-    glPopMatrix();
-    glPushMatrix();
-    glRotatef(angX,1,0,0);
-    glRotatef(angY,0,1,0);
-    drawBird();
-    glFlush();
-}
 
-void transformacoes(int key, int x, int y){
-     switch (key){
-        case GLUT_KEY_UP :
-           angX-=15;
-           break ;
-        case GLUT_KEY_DOWN :
-           angX+=15;
-           break ;
-        case GLUT_KEY_LEFT :
-           angY-=15;
-           break ;
-        case GLUT_KEY_RIGHT :
-           angY+=15;
-           break ;
-        default:
-           break;
-     }
-     glutPostRedisplay() ;
-}
-
-int main(int argc, char *argv[])
-{
-     glutInit(&argc,argv);
-     glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB | GLUT_DEPTH);
-     glutInitWindowPosition(50,50);
-     glutInitWindowSize(600,600);
-     glutCreateWindow("Bird");
-     glutDisplayFunc(display);
-     glutSpecialFunc(transformacoes);
-     init();
-     glutMainLoop();
-}
