@@ -5,8 +5,6 @@
 
 #include <GL/glut.h>
 
-GLUquadricObj *obj;
-
 float angX = 0;
 float angY = 0;
 float headRadius = 4.0;
@@ -19,8 +17,6 @@ void init(){
      glLoadIdentity();
      glOrtho(-7,7,-7,7,-7,7);
      glPushMatrix();
-     obj = gluNewQuadric();
-     gluQuadricDrawStyle(obj,GLU_LINE);
 }
 
 void drawEyes() {
