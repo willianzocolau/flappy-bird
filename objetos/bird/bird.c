@@ -7,8 +7,8 @@
 
 GLUquadricObj *obj;
 
-float angX = 0.0;
-float angY = 90.0;
+//extern float angX = 0.0;
+//extern float angY = 90.0;
 float headRadius = 4.0;
 float eyeRadius = 1.0;
 

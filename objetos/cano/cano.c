@@ -64,8 +64,7 @@ drawCylinder(int numMajor, int numMinor, float height, float radius)
         glEnd();
     }
 }
-void
-initialize(void)
+void initialize(void)
 {
     glMatrixMode(GL_PROJECTION);
     glFrustum(-0.50, 0.50, -0.50, 0.50, 1.0, 3.0);
@@ -77,8 +76,7 @@ initialize(void)
     glLightModeli(GL_LIGHT_MODEL_LOCAL_VIEWER, GL_TRUE);
 }
 
-void
-redraw(void)
+void redraw(void)
 {
     glClearColor(0, 0, 0, 0);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -112,8 +110,7 @@ redraw(void)
     glPopMatrix();
 }
 
-void
-motion(int x, int y)
+void motion(int x, int y)
 {
     if (moveObject)
     {
@@ -138,8 +135,7 @@ motion(int x, int y)
     glutPostRedisplay();
 }
 
-void
-mouse(int button, int state, int x, int y)
+void mouse(int button, int state, int x, int y)
 {
     if (state == GLUT_DOWN)
     {
@@ -169,8 +165,7 @@ mouse(int button, int state, int x, int y)
     }
 }
 
-void
-display(void)
+void display(void)
 {
     redraw();
     glFlush();
