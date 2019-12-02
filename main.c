@@ -52,9 +52,9 @@ void timerFunc(int value)
         y1 = -10000;
     }
 
-	// passo que movimenta o quadrado
+	// passo que movimenta o passaro
 	y1 += ystep;
-    pan -= panstep;
+   pan -= panstep;
 	// Redesenha a cena com as novas coordenadas
 	glutPostRedisplay();
 	glutTimerFunc(10,timerFunc, 1);
@@ -122,7 +122,7 @@ void display()
 
   //mapa
   glColor3f(0.0,0.8,0.0);
-  parede(80, 0);
+  parede(0, 0);
   parede(-10, -50);
   parede(-20, -100);
   parede(10, -150);
